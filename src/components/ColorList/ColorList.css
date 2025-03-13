@@ -65,11 +65,3 @@
 .add-btn:hover {
   background: #286090;
 }
-
-.loading {
-  color: #f39c12;
-}
-
-.error {
-  color: #e74c3c;
-}

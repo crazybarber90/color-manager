@@ -1,17 +1,15 @@
 // src/components/ColorList.js
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setColors,
-  setStatus,
-  setError,
-  removeColor,
-  addColor,
-} from '../../store/colorSlice'
+import { setError, removeColor, addColor } from '../../store/colorSlice'
 import AddColorInput from '../AddColorInput/AddColorInput'
 import './ColorList.css'
-import { fetchColors, deleteColor, addColorApi } from '../../apiCalls/ApiCalls'
+import { deleteColor, addColorApi } from '../../apiCalls/ApiCalls'
 import SearchColorInput from '../SearchColor/SearchColorInput'
+import Button from '../Button/Button'
+import useFetchColors from '../../customHooks/useFetchColors'
+import StatusMessage from '../StatusMessage/StatusMessage'
+import { toast } from 'react-toastify'
 
 const ColorList = () => {
   const dispatch = useDispatch()
@@ -20,24 +18,8 @@ const ColorList = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredColors, setFilteredColors] = useState([])
 
-  // inicijalno fetchovanje bolja iz db.json
-  useEffect(() => {
-    const loaColors = async () => {
-      dispatch(setStatus('loading'))
-      try {
-        const data = await fetchColors()
-        dispatch(setColors(data))
-        dispatch(setStatus('idle'))
-      } catch (err) {
-        dispatch(setError('Došlo je do greške'))
-        dispatch(setStatus('failed'))
-        console.error('Error', err)
-      }
-    }
-    if (status === 'idle') {
-      loaColors()
-    }
-  }, [dispatch])
+  // Custom hook inicijalno fetchovanje bolja iz db.json
+  useFetchColors() // Pozivamo custom hook
 
   // filtriranje boje na osnovu pretrage
   useEffect(() => {
@@ -53,9 +35,10 @@ const ColorList = () => {
   // dodavanje nove boje u redux i db.json
   const handleAddColor = async (newColor) => {
     try {
-      const addedColor = await addColorApi(newColor) // poziv api fun
+      const addedColor = await addColorApi(newColor) // poziv api fun iz apiCalls
       if (addColor) {
-        dispatch(addColor(addedColor)) // dodavanje boje u redux
+        dispatch(addColor(addedColor)) // dodavanje boje u rdux state
+        toast.success(`Uspesno dodata ${newColor.name} boja`)
       }
     } catch (error) {
       console.error('Error adding color:', error)
@@ -68,19 +51,21 @@ const ColorList = () => {
     try {
       await deleteColor(colorId)
       dispatch(removeColor(colorId))
+      toast.success('Boja uspesno obrisana!')
     } catch (error) {
-      dispatch(setError('Greška pri brisanju boje'))
+      dispatch(setError('Greska pri brisanju boje'))
       console.error('Error', error)
     }
   }
 
-  // loading
-  if (status === 'loading') return <p className="loading">Ucitavanje...</p>
-  if (status === 'failed') return <p className="error">Greska: {error}</p>
+  console.log('COLORSss', colors)
 
-  console.log('COLORS', colors)
   return (
     <div className="color-list-container">
+      {/* Loading */}
+      <StatusMessage status={status} error={error} />
+
+      {/* Add Color Modal */}
       {showAddColorModal && (
         <AddColorInput
           onAddColor={handleAddColor}
@@ -90,24 +75,29 @@ const ColorList = () => {
 
       <h2 className="title">Lista Boja</h2>
 
+      {/* Search And AddBtn Wrapper */}
       <div className="wrapper">
         <SearchColorInput onSearch={setSearchQuery} />
-        <button className="add-btn" onClick={() => setShowAddColorModal(true)}>
-          Dodaj Boju
-        </button>
+        <Button
+          btnFun={() => setShowAddColorModal(true)}
+          btnStyle={'add-btn'}
+          title={'Dodaj'}
+        />
       </div>
+
+      {/* List of Filtere Colors */}
       <ul className="color-list">
         {filteredColors.map(({ name, hex, id }) => (
           <li key={id} className="color-item" style={{ backgroundColor: hex }}>
             <span className="color-name">
               {name} - {hex}
             </span>
-            <button
-              className="delete-btn"
-              onClick={() => handleRemoveColor(id)}
-            >
-              Obrisi
-            </button>
+
+            <Button
+              btnFun={() => handleRemoveColor(id)}
+              btnStyle={'delete-btn'}
+              title={'Obrisi'}
+            />
           </li>
         ))}
       </ul>

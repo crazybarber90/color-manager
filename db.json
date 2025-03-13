@@ -1,23 +1,79 @@
 {
   "colors": [
-    { "id": 1, "name": "Red", "hex": "#FF0000" },
-    { "id": 2, "name": "Light Red", "hex": "#FF6666" },
-    { "id": 3, "name": "Dark Red", "hex": "#990000" },
-
-    { "id": 4, "name": "Blue", "hex": "#0000FF" },
-    { "id": 5, "name": "Light Blue", "hex": "#6699FF" },
-    { "id": 6, "name": "Dark Blue", "hex": "#000099" },
-
-    { "id": 7, "name": "Green", "hex": "#00FF00" },
-    { "id": 8, "name": "Light Green", "hex": "#99FF99" },
-    { "id": 9, "name": "Dark Green", "hex": "#006600" },
-
-    { "id": 10, "name": "Yellow", "hex": "#FFFF00" },
-    { "id": 11, "name": "Light Yellow", "hex": "#FFFF99" },
-    { "id": 12, "name": "Dark Yellow", "hex": "#CCCC00" },
-
-    { "id": 13, "name": "Purple", "hex": "#800080" },
-    { "id": 14, "name": "Light Purple", "hex": "#D699FF" },
-    { "id": 15, "name": "Dark Purple", "hex": "#4B0082" }
+    {
+      "id": "1",
+      "name": "Red",
+      "hex": "#FF0000"
+    },
+    {
+      "id": "2",
+      "name": "Light Red",
+      "hex": "#FF6666"
+    },
+    {
+      "id": "3",
+      "name": "Dark Red",
+      "hex": "#990000"
+    },
+    {
+      "id": "4",
+      "name": "Blue",
+      "hex": "#0000FF"
+    },
+    {
+      "id": "5",
+      "name": "Light Blue",
+      "hex": "#6699FF"
+    },
+    {
+      "id": "6",
+      "name": "Dark Blue",
+      "hex": "#000099"
+    },
+    {
+      "id": "7",
+      "name": "Green",
+      "hex": "#00FF00"
+    },
+    {
+      "id": "8",
+      "name": "Light Green",
+      "hex": "#99FF99"
+    },
+    {
+      "id": "9",
+      "name": "Dark Green",
+      "hex": "#006600"
+    },
+    {
+      "id": "10",
+      "name": "Yellow",
+      "hex": "#FFFF00"
+    },
+    {
+      "id": "11",
+      "name": "Light Yellow",
+      "hex": "#FFFF99"
+    },
+    {
+      "id": "12",
+      "name": "Dark Yellow",
+      "hex": "#CCCC00"
+    },
+    {
+      "id": "13",
+      "name": "Purple",
+      "hex": "#800080"
+    },
+    {
+      "id": "14",
+      "name": "Light Purple",
+      "hex": "#D699FF"
+    },
+    {
+      "id": "15",
+      "name": "Dark Purple",
+      "hex": "#4B0082"
+    }
   ]
 }
