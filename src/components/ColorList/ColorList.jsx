@@ -32,18 +32,27 @@ const ColorList = () => {
     )
   }, [searchQuery, colors])
 
-  // dodavanje nove boje u redux i db.json
+  // dodavanje nove boje u redux i db.json sa validacijom
   const handleAddColor = async (newColor) => {
-    try {
-      const addedColor = await addColorApi(newColor) // poziv api fun iz apiCalls
-      if (addColor) {
-        dispatch(addColor(addedColor)) // dodavanje boje u rdux state
-        toast.success(`Uspesno dodata ${newColor.name} boja`)
+    if (
+      colors.find(
+        (color) => color.name === newColor.name || color.hex === newColor.hex
+      )
+    ) {
+      toast.warning('Ova boja vec postoji')
+    } else {
+      try {
+        const addedColor = await addColorApi(newColor) // poziv api fun iz apiCalls
+
+        if (addColor) {
+          dispatch(addColor(addedColor)) // dodavanje boje u rdux state
+          toast.success(`Uspesno dodata ${newColor.name} boja`)
+          setShowAddColorModal(false)
+        }
+      } catch (error) {
+        console.error('Error adding color:', error)
       }
-    } catch (error) {
-      console.error('Error adding color:', error)
     }
-    setShowAddColorModal(false)
   }
 
   // brisanje boje

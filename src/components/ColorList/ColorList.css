@@ -1,5 +1,7 @@
 .color-list-container {
   width: 400px;
+  height: auto;
+  min-height: 90vh;
   margin: auto;
   padding: 10px;
   background: #fff;

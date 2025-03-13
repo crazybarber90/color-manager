@@ -8,7 +8,7 @@
 
 app se odaziva na portu - http://localhost:5173/
 
-svako brisanje boje na dugme "obrisi" brisace unesece vrednosti u fajlu db.json
+svako brisanje boje na dugme "obrisi" brisace unesene vrednosti u fajlu db.json
 
 bilo bi dobro prilikom testiranja posmatrati fajl db.json , pa na ctrl+Z vracati sve obrisanje boje
 
