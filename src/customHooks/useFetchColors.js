@@ -15,7 +15,7 @@ const useFetchColors = () => {
         dispatch(setColors(data))
         dispatch(setStatus('idle'))
       } catch (err) {
-        dispatch(setError('Doslo je do greske pri ucitavanju boja'))
+        dispatch(setError('Error while loading colors'))
         dispatch(setStatus('failed'))
         console.error('Error', err)
       }

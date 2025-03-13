@@ -15,7 +15,7 @@ const SearchColorInput = ({ onSearch }) => {
       <input
         type="text"
         className="search-input"
-        placeholder="Pretrazi boje..."
+        placeholder="Search color..."
         value={query}
         onChange={handleChange}
       />

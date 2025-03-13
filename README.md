@@ -1,10 +1,14 @@
       terminal 1:
       cd colors_manager
+      - npm i
       npm start
 
       terminal 2:
       cd colors_manager
       npm run dev
+
+      Node verzija v18.18.2
+
 
 app se odaziva na portu - http://localhost:5173/
 

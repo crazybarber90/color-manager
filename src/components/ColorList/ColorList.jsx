@@ -1,4 +1,3 @@
-// src/components/ColorList.js
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setError, removeColor, addColor } from '../../store/colorSlice'
@@ -18,10 +17,10 @@ const ColorList = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredColors, setFilteredColors] = useState([])
 
-  // Custom hook inicijalno fetchovanje bolja iz db.json
-  useFetchColors() // Pozivamo custom hook
+  // Custom hook initial fetch of colors
+  useFetchColors()
 
-  // filtriranje boje na osnovu pretrage
+  // filtering on search
   useEffect(() => {
     setFilteredColors(
       colors.filter(
@@ -32,21 +31,21 @@ const ColorList = () => {
     )
   }, [searchQuery, colors])
 
-  // dodavanje nove boje u redux i db.json sa validacijom
+  // adding new color in redux and db with validation
   const handleAddColor = async (newColor) => {
     if (
       colors.find(
         (color) => color.name === newColor.name || color.hex === newColor.hex
       )
     ) {
-      toast.warning('Ova boja vec postoji')
+      toast.warning('This color allready exist')
     } else {
       try {
-        const addedColor = await addColorApi(newColor) // poziv api fun iz apiCalls
+        const addedColor = await addColorApi(newColor) // apiCall fun
 
         if (addColor) {
-          dispatch(addColor(addedColor)) // dodavanje boje u rdux state
-          toast.success(`Uspesno dodata ${newColor.name} boja`)
+          dispatch(addColor(addedColor)) // adding in redux state
+          toast.success(`Added color  ${newColor.name}`)
           setShowAddColorModal(false)
         }
       } catch (error) {
@@ -55,19 +54,17 @@ const ColorList = () => {
     }
   }
 
-  // brisanje boje
+  // deleting color fun
   const handleRemoveColor = async (colorId) => {
     try {
       await deleteColor(colorId)
       dispatch(removeColor(colorId))
-      toast.success('Boja uspesno obrisana!')
+      toast.success('Color deleted!')
     } catch (error) {
-      dispatch(setError('Greska pri brisanju boje'))
+      dispatch(setError('Error while deleting color'))
       console.error('Error', error)
     }
   }
-
-  console.log('COLORSss', colors)
 
   return (
     <div className="color-list-container">
@@ -82,7 +79,7 @@ const ColorList = () => {
         />
       )}
 
-      <h2 className="title">Lista Boja</h2>
+      <h2 className="title">Color List</h2>
 
       {/* Search And AddBtn Wrapper */}
       <div className="wrapper">
@@ -90,7 +87,7 @@ const ColorList = () => {
         <Button
           btnFun={() => setShowAddColorModal(true)}
           btnStyle={'add-btn'}
-          title={'Dodaj'}
+          title={'Add Color'}
         />
       </div>
 
@@ -105,7 +102,7 @@ const ColorList = () => {
             <Button
               btnFun={() => handleRemoveColor(id)}
               btnStyle={'delete-btn'}
-              title={'Obrisi'}
+              title={'Delete'}
             />
           </li>
         ))}

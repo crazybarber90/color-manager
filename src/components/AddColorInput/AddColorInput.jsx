@@ -18,10 +18,10 @@ const AddColorInput = ({ onAddColor, showModal }) => {
   return (
     <div className="add-color-container">
       <div className="add-color-card">
-        <h3>Dodaj Novu Boju</h3>
+        <h3>Add new color</h3>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="colorName">Ime Boje:</label>
+            <label htmlFor="colorName">Color Name:</label>
             <input
               type="text"
               id="colorName"
@@ -29,13 +29,13 @@ const AddColorInput = ({ onAddColor, showModal }) => {
               onChange={(e) =>
                 setNewColor({ ...newColor, name: e.target.value })
               }
-              placeholder="Unesi ime boje"
+              placeholder="Enter color name"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="colorHex">Hex Kod:</label>
+            <label htmlFor="colorHex">Hex Code:</label>
             <input
               type="text"
               id="colorHex"
@@ -50,14 +50,14 @@ const AddColorInput = ({ onAddColor, showModal }) => {
 
           <div className="button-group">
             <button type="submit" className="add-btn">
-              Dodaj
+              Add Color
             </button>
             <button
               type="button"
               onClick={() => showModal(false)}
               className="cancel-btn"
             >
-              Odustani
+              Cancel
             </button>
           </div>
         </form>

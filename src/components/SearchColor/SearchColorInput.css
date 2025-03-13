@@ -19,3 +19,10 @@
   border-color: #23527c;
   box-shadow: 0 0 8px rgba(51, 122, 183, 0.5);
 }
+
+@media (max-width: 600px) {
+  .search-input {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
